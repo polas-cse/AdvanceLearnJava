@@ -1,4 +1,4 @@
-package com.advance.learn.java.callback.synchronously.age.lambda;
+package com.advance.learn.java.lambda;
 
 import java.util.Arrays;
 import java.util.List;

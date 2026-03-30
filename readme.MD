@@ -1,3 +1,24 @@
+# Java Learning Examples
+
+This repository contains **daily Java class examples** with explanations using **Java 8+ features** like **Lambda**, **Streams**, and functional interfaces.
+
+---
+
+## 📚 Topics
+
+| Topic | Short Explanation |
+|-------|-----------------|
+| [Predicate](#predicate-example) | Check conditions on objects using `Predicate<T>` functional interface. |
+
+> Click on the topic to jump to its section.
+
+---
+
+## Predicate Example
+
+**Concept:** `Predicate<T>` tests a condition on objects of type `T`.
+
+```java
 package com.advance.learn.java.callback.synchronously.fraction;
 
 import java.util.Arrays;
@@ -37,3 +58,4 @@ public class FractionChecker implements FractionCallback{
     }
 
 }
+```

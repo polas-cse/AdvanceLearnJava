@@ -1,14 +1,15 @@
-# Java Learning Examples
+# Advance Java
 
-This repository contains **daily Java class examples** with explanations using **Java 8+ features** like **Lambda**, **Streams**, and functional interfaces.
+This repository contains **Java class examples** with explanations using **Java features** like **Lambda**, **Streams**, and functional interfaces.
 
 ---
 
 ## 📚 Topics
 
-| Topic | Short Explanation |
-|-------|-----------------|
+| Topic                           | Short Explanation |
+|---------------------------------|-----------------|
 | [Predicate](#predicate-example) | Check conditions on objects using `Predicate<T>` functional interface. |
+| [Executors](#executors-example) | Run tasks asynchronously using `ExecutorService` |
 
 > Click on the topic to jump to its section.
 
@@ -57,5 +58,34 @@ public class FractionChecker implements FractionCallback{
         }
     }
 
+}
+```
+
+---
+
+## Executors Example
+
+**Concept:** Run tasks asynchronously using ExecutorService.
+
+```java
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+public class AsyncExecutorExample {
+
+    public static void main(String[] args) {
+        ExecutorService executor = Executors.newFixedThreadPool(3); // 3 threads in pool
+
+        for (int i = 1; i <= 5; i++) {
+            int orderId = i;
+            executor.submit(() -> {
+                System.out.println(Thread.currentThread().getName() + " 🛒 Processing order " + orderId);
+                try { Thread.sleep(1000); } catch (InterruptedException e) {}
+                System.out.println(Thread.currentThread().getName() + " ✅ Completed order " + orderId);
+            });
+        }
+
+        executor.shutdown(); // gracefully stop the pool after tasks finish
+    }
 }
 ```

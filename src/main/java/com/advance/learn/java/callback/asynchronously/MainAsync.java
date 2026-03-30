@@ -7,7 +7,7 @@ public class MainAsync {
 
         System.out.println("👉 Start");
 
-        for (int i = 1; i <= 5; i++) {
+        for (int i = 1; i <= 100; i++) {
             int taskNumber = i;
             service.placeOrderAsync(result -> {
                 System.out.println("Callback for task " + taskNumber + ": " + result);

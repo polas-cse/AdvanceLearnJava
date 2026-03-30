@@ -2,7 +2,7 @@ package com.advance.learn.java.callback.synchronously;
 
 public class SyncService {
     public void processTask(Callback callback) {
-        System.out.println("Processing task...");
+        System.out.println(Thread.currentThread().getName() + " Processing task...");
 
         // simulate work
         try {

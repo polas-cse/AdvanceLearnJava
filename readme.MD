@@ -91,7 +91,7 @@ The number is Even
 
 ---
 
-## ⚙️ Executors
+## ⚙️ Thread or Concurrency api
 
 **What is it?**
 `ExecutorService` manages a **pool of threads** so you don't have to create and destroy threads manually. It helps run tasks **asynchronously** and efficiently.
@@ -114,7 +114,11 @@ public class AsyncExecutorExample {
 
     public static void main(String[] args) {
         // Create a thread pool with 3 threads
-        ExecutorService executor = Executors.newFixedThreadPool(3);
+        Executors.newFixedThreadPool(3)       // fixed number of threads
+//        Executors.newCachedThreadPool()       // grows/shrinks dynamically
+//        Executors.newSingleThreadExecutor()   // 1 thread, tasks queued
+//        Executors.newWorkStealingPool()       // ForkJoinPool under the hood
+//        Executors.newScheduledThreadPool(3)   // for delay/periodic tasks
 
         for (int i = 1; i <= 5; i++) {
             int orderId = i;

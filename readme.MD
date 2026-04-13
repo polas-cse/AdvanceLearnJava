@@ -152,165 +152,293 @@ pool-1-thread-1 🛒 Processing order #4
 
 ---
 
-## 🧩 Lambda & Functional Interfaces
+# ☕ Java Functional Interfaces Cheat Sheet
 
-**What is a Lambda?**
-A lambda is a **short, anonymous function** that can be passed around like a value. It removes boilerplate code and works with **functional interfaces** (interfaces with exactly one abstract method).
+# ☕ Java Functional Interfaces Cheat Sheet (With Explanation & Methods)
 
-**Syntax:**
-```java
-(parameters) -> expression
-(parameters) -> { statements; }
-```
-
-Below are the **8 most commonly used functional interfaces** in Java:
+A **Functional Interface** is an interface that contains **only one abstract method** and can be used with **lambda expressions**.
 
 ---
 
+# 🔹 Core Functional Interfaces
+
 ### 1️⃣ `Runnable`
 
-| | |
-|--|--|
-| **Purpose** | Represents a task with **no input and no return value** |
-| **Method** | `void run()` |
-| **Use case** | Running code in a thread |
+|                 |                                                                                         |
+| --------------- | --------------------------------------------------------------------------------------- |
+| **Purpose**     | Represents a task with **no input and no return value**                                 |
+| **Method**      | `void run()`                                                                            |
+| **Explanation** | Used when you just want to execute some code without passing data or returning anything |
 
 ```java
 Runnable task = () -> System.out.println("Running in a thread!");
 new Thread(task).start();
-// Output: Running in a thread!
 ```
 
 ---
 
 ### 2️⃣ `Supplier<T>`
 
-| | |
-|--|--|
-| **Purpose** | **Supplies** a value without taking any input |
-| **Method** | `T get()` |
-| **Use case** | Lazy initialization, factory methods |
+|                 |                                                                  |
+| --------------- | ---------------------------------------------------------------- |
+| **Purpose**     | Supplies a value without taking any input                        |
+| **Method**      | `T get()`                                                        |
+| **Explanation** | Used to generate or provide data (lazy loading, factory methods) |
 
 ```java
 Supplier<String> supplier = () -> "Hello, World!";
 System.out.println(supplier.get());
-// Output: Hello, World!
 ```
 
 ---
 
 ### 3️⃣ `Consumer<T>`
 
-| | |
-|--|--|
-| **Purpose** | **Accepts** a value and performs an action, returns nothing |
-| **Method** | `void accept(T t)` |
-| **Use case** | Printing, logging, saving data |
+|                 |                                                            |
+| --------------- | ---------------------------------------------------------- |
+| **Purpose**     | Accepts a value and performs an action (no return)         |
+| **Method**      | `void accept(T t)`                                         |
+| **Explanation** | Used for operations like printing, logging, or saving data |
 
 ```java
 Consumer<String> printer = msg -> System.out.println("Message: " + msg);
 printer.accept("Java Lambda");
-// Output: Message: Java Lambda
 ```
 
 ---
 
 ### 4️⃣ `Function<T, R>`
 
-| | |
-|--|--|
-| **Purpose** | **Transforms** input of type `T` into output of type `R` |
-| **Method** | `R apply(T t)` |
-| **Use case** | Data conversion, mapping |
+|                 |                                                                    |
+| --------------- | ------------------------------------------------------------------ |
+| **Purpose**     | Transforms input into output                                       |
+| **Method**      | `R apply(T t)`                                                     |
+| **Explanation** | Used when you need to convert or map data from one type to another |
 
 ```java
 Function<String, Integer> lengthFunc = str -> str.length();
 System.out.println(lengthFunc.apply("Polas"));
-// Output: 5
 ```
 
 ---
 
 ### 5️⃣ `Predicate<T>`
 
-| | |
-|--|--|
-| **Purpose** | **Tests** a condition on `T` and returns a `boolean` |
-| **Method** | `boolean test(T t)` |
-| **Use case** | Filtering, validation |
+|                 |                                           |
+| --------------- | ----------------------------------------- |
+| **Purpose**     | Tests a condition and returns boolean     |
+| **Method**      | `boolean test(T t)`                       |
+| **Explanation** | Commonly used in filtering and validation |
 
 ```java
 Predicate<Integer> isEven = n -> n % 2 == 0;
 System.out.println(isEven.test(10));
-// Output: true
 ```
 
 ---
 
+# 🔹 Operators
+
 ### 6️⃣ `UnaryOperator<T>`
 
-| | |
-|--|--|
-| **Purpose** | Special `Function<T, T>` — input and output are the **same type** |
-| **Method** | `T apply(T t)` |
-| **Use case** | Transforming a value in place (e.g., square, negate) |
+|                 |                                                       |
+| --------------- | ----------------------------------------------------- |
+| **Purpose**     | Special Function where input and output are same type |
+| **Method**      | `T apply(T t)`                                        |
+| **Explanation** | Used to modify a value without changing its type      |
 
 ```java
 UnaryOperator<Integer> square = n -> n * n;
 System.out.println(square.apply(5));
-// Output: 25
 ```
 
 ---
 
 ### 7️⃣ `BinaryOperator<T>`
 
-| | |
-|--|--|
-| **Purpose** | BinaryOperator<T> performs an operation on two values of the same type and returns a result of the same type |
-| **Method** | `T apply(T t1, T t2)` |
-| **Use case** | Aggregation, combining values (sum, max, merge) |
+|                 |                                                  |
+| --------------- | ------------------------------------------------ |
+| **Purpose**     | Takes two same-type inputs and returns same type |
+| **Method**      | `T apply(T t1, T t2)`                            |
+| **Explanation** | Used for combining values like sum, max, merge   |
 
 ```java
 BinaryOperator<Integer> sum = (a, b) -> a + b;
 System.out.println(sum.apply(10, 20));
-// Output: 30
 ```
 
 ---
+
+# 🔹 Bi Functional Interfaces
 
 ### 8️⃣ `BiFunction<T, U, R>`
 
-| | |
-|--|--|
-| **Purpose** | Takes **two inputs** of different types `T` and `U`, returns type `R` |
-| **Method** | `R apply(T t, U u)` |
-| **Use case** | Combining two values of different types into a result |
+|                 |                                           |
+| --------------- | ----------------------------------------- |
+| **Purpose**     | Takes two inputs and returns a result     |
+| **Method**      | `R apply(T t, U u)`                       |
+| **Explanation** | Useful when combining two different types |
 
 ```java
-BiFunction<Integer, Double, String> combine = (a, b) -> "Result: " + (a + b);
+BiFunction<Integer, Double, String> combine =
+    (a, b) -> "Result: " + (a + b);
+
 System.out.println(combine.apply(5, 4.5));
-// Output: Result: 9.5
 ```
 
 ---
 
-## 🗺️ Quick Reference Cheat Sheet
+### 9️⃣ `BiConsumer<T, U>`
 
-| Interface | Input | Output | Method |
-|-----------|-------|--------|--------|
-| `Runnable` | None | None | `run()` |
-| `Supplier<T>` | None | `T` | `get()` |
-| `Consumer<T>` | `T` | None | `accept(T)` |
-| `Function<T,R>` | `T` | `R` | `apply(T)` |
-| `Predicate<T>` | `T` | `boolean` | `test(T)` |
-| `UnaryOperator<T>` | `T` | `T` | `apply(T)` |
-| `BinaryOperator<T>` | `T, T` | `T` | `apply(T, T)` |
-| `BiFunction<T,U,R>` | `T, U` | `R` | `apply(T, U)` |
+|                 |                                                                   |
+| --------------- | ----------------------------------------------------------------- |
+| **Purpose**     | Takes two inputs and performs action                              |
+| **Method**      | `void accept(T t, U u)`                                           |
+| **Explanation** | Used for operations like printing two values or storing key-value |
+
+```java
+BiConsumer<String, Integer> bc =
+    (name, age) -> System.out.println(name + " " + age);
+
+bc.accept("Polas", 25);
+```
 
 ---
 
-## 🛠️ Requirements
+### 🔟 `BiPredicate<T, U>`
+
+|                 |                                      |
+| --------------- | ------------------------------------ |
+| **Purpose**     | Takes two inputs and returns boolean |
+| **Method**      | `boolean test(T t, U u)`             |
+| **Explanation** | Used for comparing two values        |
+
+```java
+BiPredicate<Integer, Integer> bp =
+    (a, b) -> a > b;
+
+System.out.println(bp.test(5, 3));
+```
+
+---
+
+# 🔹 Primitive Specializations (Performance)
+
+### 1️⃣1️⃣ `IntPredicate`
+
+|                 |                                 |
+| --------------- | ------------------------------- |
+| **Purpose**     | Predicate for int               |
+| **Method**      | `boolean test(int value)`       |
+| **Explanation** | Avoids boxing/unboxing overhead |
+
+```java
+IntPredicate p = x -> x % 2 == 0;
+System.out.println(p.test(4));
+```
+
+---
+
+### 1️⃣2️⃣ `IntFunction<R>`
+
+|                 |                                  |
+| --------------- | -------------------------------- |
+| **Purpose**     | Takes int and returns object     |
+| **Method**      | `R apply(int value)`             |
+| **Explanation** | Used when input is primitive int |
+
+```java
+IntFunction<String> f = x -> "Value: " + x;
+System.out.println(f.apply(10));
+```
+
+---
+
+### 1️⃣3️⃣ `IntConsumer`
+
+|                 |                                  |
+| --------------- | -------------------------------- |
+| **Purpose**     | Takes int and performs action    |
+| **Method**      | `void accept(int value)`         |
+| **Explanation** | Used for fast processing of ints |
+
+```java
+IntConsumer c = x -> System.out.println(x);
+c.accept(100);
+```
+
+---
+
+### 1️⃣4️⃣ `IntSupplier`
+
+|                 |                                |
+| --------------- | ------------------------------ |
+| **Purpose**     | Supplies int value             |
+| **Method**      | `int getAsInt()`               |
+| **Explanation** | Generates primitive int values |
+
+```java
+IntSupplier s = () -> 42;
+System.out.println(s.getAsInt());
+```
+
+---
+
+# 🔹 Other Useful Functional Interfaces
+
+### 1️⃣5️⃣ `Callable<V>`
+
+|                 |                                               |
+| --------------- | --------------------------------------------- |
+| **Purpose**     | Returns a value and may throw exception       |
+| **Method**      | `V call() throws Exception`                   |
+| **Explanation** | Used in multi-threading when result is needed |
+
+```java
+Callable<String> c = () -> "Hello";
+System.out.println(c.call());
+```
+
+---
+
+### 1️⃣6️⃣ `Comparator<T>`
+
+|                 |                              |
+| --------------- | ---------------------------- |
+| **Purpose**     | Compares two objects         |
+| **Method**      | `int compare(T o1, T o2)`    |
+| **Explanation** | Used for sorting collections |
+
+```java
+Comparator<Integer> comp = (a, b) -> a - b;
+System.out.println(comp.compare(5, 3));
+```
+
+---
+
+## 🗺️ Complete Quick Cheat Sheet (All Important Functional Interfaces)
+
+| Interface         | Input | Output  | Method          |
+| ----------------- | ----- | ------- | --------------- |
+| Runnable          | None  | None    | `run()`         |
+| Supplier<T>       | None  | T       | `get()`         |
+| Consumer<T>       | T     | None    | `accept(T)`     |
+| Function<T,R>     | T     | R       | `apply(T)`      |
+| Predicate<T>      | T     | boolean | `test(T)`       |
+| UnaryOperator<T>  | T     | T       | `apply(T)`      |
+| BinaryOperator<T> | T, T  | T       | `apply(T, T)`   |
+| BiFunction<T,U,R> | T, U  | R       | `apply(T, U)`   |
+| BiConsumer<T,U>   | T, U  | None    | `accept(T, U)`  |
+| BiPredicate<T,U>  | T, U  | boolean | `test(T, U)`    |
+| IntPredicate      | int   | boolean | `test(int)`     |
+| IntFunction<R>    | int   | R       | `apply(int)`    |
+| IntConsumer       | int   | None    | `accept(int)`   |
+| IntSupplier       | None  | int     | `getAsInt()`    |
+| Callable<V>       | None  | V       | `call()`        |
+| Comparator<T>     | T, T  | int     | `compare(T, T)` |
+
+---
+
 
 - Java 8 or higher (Java 17+ recommended)
 - Any Java IDE (IntelliJ IDEA, Eclipse, VS Code)

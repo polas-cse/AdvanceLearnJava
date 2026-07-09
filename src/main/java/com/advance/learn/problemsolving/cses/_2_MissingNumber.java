@@ -7,7 +7,7 @@ import java.util.Arrays;
 
 import java.util.StringTokenizer;
 
-public class MissingNumber {
+public class _2_MissingNumber {
     public static void main(String[] args) throws IOException {
         BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
         int n = Integer.parseInt(br.readLine().trim());

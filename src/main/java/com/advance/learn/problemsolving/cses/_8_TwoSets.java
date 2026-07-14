@@ -1,9 +1,8 @@
 package com.advance.learn.problemsolving.cses;
 
 import java.io.*;
-import java.util.*;
 
-public class TwoSets {
+public class _8_TwoSets {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int n = Integer.parseInt(br.readLine().trim());
